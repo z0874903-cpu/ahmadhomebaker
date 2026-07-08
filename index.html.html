@@ -1,0 +1,1003 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Ahmad home bakers — baked this morning, boxed for you</title>
+<meta name="description" content="Handcrafted brownies, cookies and cakes, baked to order and delivered fresh. isshesara — a small home bakery." />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,500&family=Work+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --cocoa: #2B1B14;
+    --cocoa-2: #3E2A1E;
+    --cream: #FBF3EA;
+    --blush: #E8A0A6;
+    --caramel: #D4A24C;
+    --milk: #6B4226;
+    --ink: #241611;
+  }
+
+  *{ box-sizing: border-box; }
+  html{ scroll-behavior: smooth; }
+  body{
+    margin:0;
+    background: var(--cocoa);
+    color: var(--cream);
+    font-family: 'Work Sans', sans-serif;
+    font-weight: 400;
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+  }
+  h1,h2,h3, .display{
+    font-family: 'Fraunces', serif;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    margin: 0;
+  }
+  a{ color: inherit; }
+  img{ max-width: 100%; display:block; }
+
+  .wrap{
+    max-width: 1120px;
+    margin: 0 auto;
+    padding: 0 32px;
+  }
+
+  /* subtle paper-grain texture */
+  .grain{
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    opacity: 0.05;
+    z-index: 1;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+
+  /* ---------- NAV ---------- */
+  header{
+    position: sticky;
+    top:0;
+    z-index: 20;
+    background: rgba(43,27,20,0.86);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(251,243,234,0.08);
+  }
+  nav{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding: 20px 0;
+  }
+  .logo{
+    font-family:'Fraunces', serif;
+    font-size: 22px;
+    font-style: italic;
+    font-weight: 500;
+    letter-spacing: 0.02em;
+  }
+  .navlinks{
+    display:flex;
+    gap: 32px;
+    font-size: 14px;
+    letter-spacing: 0.03em;
+  }
+  .navlinks a{
+    text-decoration:none;
+    opacity: 0.75;
+    transition: opacity .2s;
+  }
+  .navlinks a:hover{ opacity: 1; }
+  .nav-cta{
+    font-size: 13px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    background: var(--blush);
+    color: var(--ink);
+    padding: 10px 20px;
+    border-radius: 999px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: transform .2s ease, box-shadow .2s ease;
+    white-space: nowrap;
+  }
+  .nav-cta:hover{ transform: translateY(-2px); box-shadow: 0 8px 20px rgba(232,160,166,0.25); }
+
+  .nav-right{
+    display:flex;
+    align-items:center;
+    gap: 18px;
+  }
+  .cart-btn{
+    position: relative;
+    background: none;
+    border: 1px solid rgba(251,243,234,0.25);
+    color: var(--cream);
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    cursor: pointer;
+    transition: border-color .2s ease, transform .2s ease;
+  }
+  .cart-btn:hover{ border-color: var(--caramel); transform: translateY(-2px); }
+  .cart-btn svg{ width: 19px; height: 19px; }
+  .cart-count{
+    position:absolute;
+    top: -6px; right: -6px;
+    background: var(--blush);
+    color: var(--ink);
+    font-size: 11px;
+    font-weight: 700;
+    min-width: 19px;
+    height: 19px;
+    border-radius: 50%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    padding: 0 4px;
+    transform: scale(0);
+    transition: transform .2s cubic-bezier(.3,1.4,.4,1);
+  }
+  .cart-count.show{ transform: scale(1); }
+
+  @media (max-width: 720px){
+    .navlinks{ display:none; }
+  }
+
+  /* ---------- HERO ---------- */
+  .hero{
+    position: relative;
+    padding: 96px 0 80px;
+    overflow: hidden;
+  }
+  .hero-grid{
+    display:grid;
+    grid-template-columns: 1.1fr 0.9fr;
+    gap: 48px;
+    align-items:center;
+  }
+  .eyebrow{
+    font-size: 13px;
+    text-transform: uppercase;
+    letter-spacing: 0.16em;
+    color: var(--blush);
+    font-weight: 600;
+    margin-bottom: 18px;
+    display:flex;
+    align-items:center;
+    gap: 10px;
+  }
+  .eyebrow::before{
+    content:"";
+    width: 22px; height:1px;
+    background: var(--blush);
+    display:inline-block;
+  }
+  .hero h1{
+    font-size: clamp(40px, 6vw, 68px);
+    line-height: 1.02;
+  }
+  .hero h1 em{
+    font-style: italic;
+    color: var(--caramel);
+  }
+  .hero p.lede{
+    margin-top: 22px;
+    font-size: 18px;
+    max-width: 46ch;
+    opacity: 0.82;
+  }
+  .hero-actions{
+    margin-top: 34px;
+    display:flex;
+    gap: 16px;
+    align-items:center;
+    flex-wrap: wrap;
+  }
+  .btn-primary{
+    background: var(--cream);
+    color: var(--ink);
+    text-decoration:none;
+    padding: 15px 28px;
+    border-radius: 999px;
+    font-weight: 600;
+    font-size: 15px;
+    transition: transform .2s ease;
+  }
+  .btn-primary:hover{ transform: translateY(-2px); }
+  .btn-ghost{
+    text-decoration:none;
+    font-size: 15px;
+    font-weight: 600;
+    border-bottom: 1px solid rgba(251,243,234,0.4);
+    padding-bottom: 3px;
+    opacity: 0.9;
+  }
+
+  /* stamp badge — the signature element */
+  .stamp-wrap{
+    display:flex;
+    justify-content:center;
+    position: relative;
+  }
+  .stamp{
+    width: 240px;
+    aspect-ratio: 1;
+    border: 2.5px solid var(--caramel);
+    border-radius: 50%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    transform: rotate(-9deg);
+    position: relative;
+    color: var(--caramel);
+    animation: stampIn .7s cubic-bezier(.2,1.4,.4,1) both;
+    animation-delay: .15s;
+  }
+  .stamp::before, .stamp::after{
+    content:"";
+    position:absolute;
+    border-radius:50%;
+    border: 1px solid var(--caramel);
+    opacity: 0.5;
+  }
+  .stamp::before{ inset: 10px; }
+  .stamp::after{ inset: 20px; }
+  .stamp-text{
+    text-align:center;
+    text-transform: uppercase;
+  }
+  .stamp-text .top{
+    font-size: 12px;
+    letter-spacing: 0.14em;
+    font-weight: 700;
+  }
+  .stamp-text .big{
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-size: 26px;
+    margin: 4px 0;
+    text-transform: none;
+  }
+  .stamp-text .date{
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    opacity: 0.85;
+  }
+  @keyframes stampIn{
+    0%{ opacity:0; transform: rotate(-9deg) scale(1.6); }
+    100%{ opacity:1; transform: rotate(-9deg) scale(1); }
+  }
+  @media (max-width: 860px){
+    .hero-grid{ grid-template-columns: 1fr; }
+    .stamp-wrap{ order:-1; margin-bottom: 8px; }
+    .stamp{ width: 180px; }
+  }
+
+  /* ---------- MENU (order-ticket cards) ---------- */
+  section{ padding: 88px 0; position: relative; }
+  .section-head{
+    display:flex;
+    justify-content:space-between;
+    align-items:flex-end;
+    gap: 24px;
+    margin-bottom: 48px;
+    flex-wrap: wrap;
+  }
+  .section-head h2{
+    font-size: clamp(30px, 4vw, 42px);
+  }
+  .section-head p{
+    max-width: 40ch;
+    opacity: 0.7;
+    font-size: 15px;
+  }
+
+  .menu-grid{
+    display:grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 28px;
+  }
+  @media (max-width: 900px){
+    .menu-grid{ grid-template-columns: 1fr; }
+  }
+
+  .ticket{
+    background: var(--cream);
+    color: var(--ink);
+    border-radius: 4px;
+    padding: 28px 26px 24px;
+    position: relative;
+    transform: rotate(var(--tilt, 0deg));
+    transition: transform .25s ease, box-shadow .25s ease;
+    box-shadow: 0 12px 28px rgba(0,0,0,0.28);
+  }
+  .ticket:nth-child(1){ --tilt: -1.5deg; }
+  .ticket:nth-child(2){ --tilt: 1deg; }
+  .ticket:nth-child(3){ --tilt: -0.7deg; }
+  .ticket:hover{ transform: rotate(0deg) translateY(-6px); box-shadow: 0 20px 36px rgba(0,0,0,0.32); }
+  .ticket::before{
+    content:"";
+    position:absolute;
+    top:-9px; left: 50%;
+    transform: translateX(-50%) rotate(-3deg);
+    width: 46px; height:18px;
+    background: rgba(212,162,76,0.55);
+    box-shadow: 0 2px 4px rgba(0,0,0,0.15);
+  }
+  .ticket .tag{
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--milk);
+    font-weight: 700;
+  }
+  .ticket h3{
+    font-size: 24px;
+    margin-top: 8px;
+    color: var(--ink);
+  }
+  .ticket .desc{
+    font-size: 14px;
+    opacity: 0.72;
+    margin-top: 10px;
+    min-height: 42px;
+  }
+  .ticket .perf{
+    border-top: 1px dashed rgba(36,22,17,0.25);
+    margin-top: 18px;
+    padding-top: 14px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+  }
+  .ticket .price{
+    font-family:'Fraunces', serif;
+    font-style: italic;
+    font-size: 20px;
+  }
+  .ticket .price small{
+    font-family:'Work Sans', sans-serif;
+    font-style: normal;
+    font-size: 12px;
+    opacity: 0.6;
+  }
+  .ticket .order-link{
+    font-size: 12px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    text-decoration:none;
+    color: var(--blush-dark, #A85860);
+    border-bottom: 1px solid currentColor;
+  }
+
+  /* ---------- PROCESS ---------- */
+  .process{
+    background: var(--cocoa-2);
+    border-radius: 24px;
+    padding: 64px 48px;
+  }
+  @media (max-width: 720px){ .process{ padding: 48px 24px; } }
+  .steps{
+    display:grid;
+    grid-template-columns: repeat(3,1fr);
+    gap: 40px;
+    margin-top: 44px;
+  }
+  @media (max-width: 860px){ .steps{ grid-template-columns: 1fr; } }
+  .step{
+    position: relative;
+    padding-left: 0;
+  }
+  .step .num{
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-size: 15px;
+    color: var(--caramel);
+    display:block;
+    margin-bottom: 14px;
+  }
+  .step h3{ font-size: 21px; }
+  .step p{ margin-top: 10px; font-size: 14.5px; opacity: 0.72; max-width: 34ch; }
+  .step-divider{
+    height: 1px;
+    background: linear-gradient(to right, transparent, rgba(251,243,234,0.18), transparent);
+    margin: 0 -48px 0;
+  }
+
+  /* ---------- QUOTE / RECEIPT ---------- */
+  .receipt-wrap{
+    display:flex;
+    justify-content:center;
+  }
+  .receipt{
+    background: var(--cream);
+    color: var(--ink);
+    width: min(440px, 100%);
+    padding: 36px 34px;
+    font-family: 'Work Sans', sans-serif;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+    position: relative;
+    transform: rotate(-1deg);
+  }
+  .receipt::after{
+    content:"";
+    position:absolute;
+    left:0; right:0; bottom:-8px;
+    height: 16px;
+    background:
+      linear-gradient(135deg, transparent 50%, var(--cream) 50%) 0 0/16px 16px repeat-x,
+      linear-gradient(-135deg, transparent 50%, var(--cream) 50%) 0 0/16px 16px repeat-x;
+  }
+  .receipt .r-head{
+    text-align:center;
+    font-family:'Fraunces', serif;
+    font-style: italic;
+    font-size: 18px;
+    padding-bottom: 14px;
+    border-bottom: 1px dashed rgba(36,22,17,0.3);
+  }
+  .receipt blockquote{
+    margin: 20px 0;
+    font-size: 16px;
+    line-height: 1.6;
+  }
+  .receipt .r-foot{
+    display:flex;
+    justify-content:space-between;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    opacity: 0.65;
+    border-top: 1px dashed rgba(36,22,17,0.3);
+    padding-top: 12px;
+    margin-top: 8px;
+  }
+
+  /* ---------- CTA BAND ---------- */
+  .cta-band{
+    background: linear-gradient(135deg, var(--blush), var(--caramel));
+    border-radius: 24px;
+    padding: 64px 48px;
+    text-align:center;
+    color: var(--ink);
+  }
+  .cta-band h2{ font-size: clamp(28px, 4vw, 40px); }
+  .cta-band p{ margin-top: 14px; opacity: 0.8; }
+  .cta-band .hero-actions{ justify-content: center; margin-top: 30px; }
+  .cta-band .btn-primary{ background: var(--ink); color: var(--cream); }
+  .cta-band .btn-ghost{ border-bottom-color: rgba(36,22,17,0.4); }
+
+  /* ---------- ADD TO CART BUTTON (on tickets) ---------- */
+  .perf{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+  }
+  .add-btn{
+    display:flex;
+    align-items:center;
+    gap: 7px;
+    background: var(--ink);
+    color: var(--cream);
+    border: none;
+    padding: 9px 14px;
+    border-radius: 999px;
+    font-size: 12px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    cursor: pointer;
+    transition: background .2s ease, transform .15s ease;
+    font-family: 'Work Sans', sans-serif;
+  }
+  .add-btn:hover{ background: var(--milk); }
+  .add-btn:active{ transform: scale(0.94); }
+  .add-btn svg{ width: 14px; height: 14px; }
+  .add-btn.added{ background: #5C8A5C; }
+
+  /* ---------- CART OVERLAY + DRAWER ---------- */
+  .cart-overlay{
+    position: fixed;
+    inset: 0;
+    background: rgba(20,12,8,0.55);
+    backdrop-filter: blur(2px);
+    z-index: 40;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity .3s ease;
+  }
+  .cart-overlay.open{ opacity: 1; pointer-events: auto; }
+
+  .cart-drawer{
+    position: fixed;
+    top: 0; right: 0;
+    height: 100%;
+    width: min(400px, 92vw);
+    background: var(--cream);
+    color: var(--ink);
+    z-index: 50;
+    transform: translateX(100%);
+    transition: transform .35s cubic-bezier(.25,1,.4,1);
+    display:flex;
+    flex-direction: column;
+    box-shadow: -20px 0 50px rgba(0,0,0,0.35);
+  }
+  .cart-drawer.open{ transform: translateX(0); }
+
+  .cart-head{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding: 26px 26px 20px;
+    border-bottom: 1px dashed rgba(36,22,17,0.25);
+  }
+  .cart-head h3{
+    font-size: 20px;
+  }
+  .cart-close{
+    background:none;
+    border:none;
+    cursor:pointer;
+    color: var(--ink);
+    width: 34px; height:34px;
+    display:flex; align-items:center; justify-content:center;
+    border-radius: 50%;
+    transition: background .2s ease;
+  }
+  .cart-close:hover{ background: rgba(36,22,17,0.08); }
+  .cart-close svg{ width:18px; height:18px; }
+
+  .cart-items{
+    flex: 1;
+    overflow-y: auto;
+    padding: 12px 26px;
+  }
+  .cart-empty{
+    text-align:center;
+    opacity: 0.55;
+    font-size: 14px;
+    padding: 60px 20px;
+  }
+  .cart-item{
+    display:flex;
+    gap: 14px;
+    padding: 18px 0;
+    border-bottom: 1px dashed rgba(36,22,17,0.15);
+  }
+  .cart-item:last-child{ border-bottom: none; }
+  .ci-info{ flex:1; }
+  .ci-name{
+    font-family:'Fraunces', serif;
+    font-size: 16px;
+    font-weight: 600;
+  }
+  .ci-price{
+    font-size: 13px;
+    opacity: 0.6;
+    margin-top: 2px;
+  }
+  .ci-controls{
+    display:flex;
+    align-items:center;
+    gap: 10px;
+    margin-top: 10px;
+  }
+  .qty-btn{
+    width: 24px; height: 24px;
+    border-radius: 50%;
+    border: 1px solid rgba(36,22,17,0.25);
+    background: none;
+    cursor:pointer;
+    font-size: 14px;
+    line-height:1;
+    display:flex; align-items:center; justify-content:center;
+    color: var(--ink);
+  }
+  .qty-btn:hover{ border-color: var(--ink); }
+  .qty-val{ font-size: 13px; font-weight: 600; min-width: 16px; text-align:center; }
+  .ci-remove{
+    background:none;
+    border:none;
+    color: #A85860;
+    font-size: 12px;
+    text-decoration: underline;
+    cursor:pointer;
+    margin-left: auto;
+    font-family: 'Work Sans', sans-serif;
+  }
+  .ci-line-total{
+    font-family:'Fraunces', serif;
+    font-style: italic;
+    font-size: 15px;
+    white-space: nowrap;
+  }
+
+  .cart-foot{
+    padding: 22px 26px 28px;
+    border-top: 1px dashed rgba(36,22,17,0.25);
+  }
+  .cart-subtotal{
+    display:flex;
+    justify-content:space-between;
+    font-size: 15px;
+    margin-bottom: 16px;
+  }
+  .cart-subtotal .amt{
+    font-family:'Fraunces', serif;
+    font-style: italic;
+    font-size: 19px;
+  }
+  .checkout-btn{
+    width: 100%;
+    background: var(--ink);
+    color: var(--cream);
+    border: none;
+    padding: 15px;
+    border-radius: 999px;
+    font-weight: 700;
+    font-size: 14px;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    cursor: pointer;
+    transition: background .2s ease, opacity .2s ease;
+  }
+  .checkout-btn:hover{ background: var(--milk); }
+  .checkout-btn:disabled{ opacity: 0.4; cursor: not-allowed; }
+  .cart-note{
+    font-size: 11.5px;
+    opacity: 0.55;
+    text-align:center;
+    margin-top: 12px;
+  }
+
+  /* ---------- FOOTER ---------- */
+  footer{
+    padding: 48px 0 40px;
+    border-top: 1px solid rgba(251,243,234,0.08);
+    font-size: 13px;
+    opacity: 0.6;
+    display:flex;
+    justify-content:space-between;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+  footer a{ text-decoration:none; }
+
+  @media (prefers-reduced-motion: reduce){
+    *{ animation: none !important; transition: none !important; }
+  }
+
+  :focus-visible{
+    outline: 2px solid var(--caramel);
+    outline-offset: 3px;
+  }
+</style>
+</head>
+<body>
+<div class="grain"></div>
+
+<header>
+  <div class="wrap">
+    <nav>
+      <div class="logo">ahmadhomebakers</div>
+      <div class="navlinks">
+        <a href="#menu">Menu</a>
+        <a href="#process">How it works</a>
+        <a href="#order">Order</a>
+      </div>
+      <div class="nav-right">
+        <button class="cart-btn" id="cart-toggle" aria-label="Open cart">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="9" cy="21" r="1"></circle>
+            <circle cx="20" cy="21" r="1"></circle>
+            <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
+          </svg>
+          <span class="cart-count" id="cart-count">0</span>
+        </button>
+        <a class="nav-cta" href="#order">Order now</a>
+      </div>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <section class="hero">
+    <div class="wrap hero-grid">
+      <div>
+        <div class="eyebrow">Small batch · Home kitchen</div>
+        <h1>Baked this<br>morning, boxed<br>for <em>you</em>.</h1>
+        <p class="lede">ahmad home bakers is a home bakery making fudgy brownies, thick-cut cookies and layered cakes to order — nothing sits on a shelf waiting for you. It's made after you ask for it.</p>
+        <div class="hero-actions">
+          <a class="btn-primary" href="#menu">See the menu</a>
+          <a class="btn-ghost" href="#process">How delivery works →</a>
+        </div>
+      </div>
+      <div class="stamp-wrap">
+        <div class="stamp">
+          <div class="stamp-text">
+            <div class="top">Fresh Today</div>
+            <div class="big">ahmadhomebakers</div>
+            <div class="date" id="stamp-date">—</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="menu">
+    <div class="wrap">
+      <div class="section-head">
+        <div>
+          <h2>What's in the box</h2>
+        </div>
+        <p>Three things we make often, made properly. Everything is baked once your order is placed.</p>
+      </div>
+      <div class="menu-grid">
+        <article class="ticket">
+          <div class="tag">Order No. 01</div>
+          <h3>Fudge Brownies</h3>
+          <p class="desc">Dense, dark-chocolate squares with a crackled top and a soft, underbaked centre. Sold by the box of six.</p>
+          <div class="perf">
+            <span class="price">Rs 950 <small>/ box of 6</small></span>
+            <button class="add-btn" data-id="brownies" data-name="Fudge Brownies" data-price="950">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M5 12h14"/></svg>
+              Add
+            </button>
+          </div>
+        </article>
+        <article class="ticket">
+          <div class="tag">Order No. 02</div>
+          <h3>Thick-Cut Cookies</h3>
+          <p class="desc">Chunky, chewy-centred cookies in rotating flavours — chocolate chip, pistachio, and biscoff.</p>
+          <div class="perf">
+            <span class="price">Rs 750 <small>/ box of 6</small></span>
+            <button class="add-btn" data-id="cookies" data-name="Thick-Cut Cookies" data-price="750">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M5 12h14"/></svg>
+              Add
+            </button>
+          </div>
+        </article>
+        <article class="ticket">
+          <div class="tag">Order No. 03</div>
+          <h3>Layered Cakes</h3>
+          <p class="desc">Whole cakes built to order — red velvet, chocolate fudge, or vanilla bean. Two days' notice, please.</p>
+          <div class="perf">
+            <span class="price">From Rs 2,800</span>
+            <button class="add-btn" data-id="cake" data-name="Layered Cake" data-price="2800">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M5 12h14"/></svg>
+              Add
+            </button>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section id="process">
+    <div class="wrap">
+      <div class="process">
+        <div class="section-head" style="margin-bottom:0;">
+          <div>
+            <h2>From oven to door</h2>
+          </div>
+          <p>No stock, no waiting shelf. Your order moves through three steps, in this order, every time.</p>
+        </div>
+        <div class="steps">
+          <div class="step">
+            <span class="num">01 · Baked</span>
+            <h3>Made after you order</h3>
+            <p>Nothing is pre-made. Your order goes into the oven only once it's confirmed.</p>
+          </div>
+          <div class="step">
+            <span class="num">02 · Boxed</span>
+            <h3>Packed while still warm</h3>
+            <p>Cooled just enough to hold shape, then boxed so it travels without falling apart.</p>
+          </div>
+          <div class="step">
+            <span class="num">03 · Delivered</span>
+            <h3>To your door, same day</h3>
+            <p>Local delivery within the city, usually within a few hours of baking.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <div class="section-head" style="justify-content:center; text-align:center; flex-direction:column; align-items:center;">
+        <h2>What people say after the first bite</h2>
+      </div>
+      <div class="receipt-wrap">
+        <div class="receipt">
+          <div class="r-head">ahmadhomebakers · order slip</div>
+          <blockquote>"The brownies actually taste underbaked in the middle, in the best way. Ordered twice in one week."</blockquote>
+          <div class="r-foot">
+            <span>Verified order</span>
+            <span>★★★★★</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="order">
+    <div class="wrap">
+      <div class="cta-band">
+        <h2>Ready to order?</h2>
+        <p>Message us your box and we'll confirm a delivery window the same day.</p>
+        <div class="hero-actions">
+          <a class="btn-primary" href="https://wa.me/923446513923" target="_blank" rel="noopener">Order on WhatsApp</a>
+          <a class="btn-ghost" href="mailto:hello@isshesara.com">hello@ahmadhomebakers.com</a>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap" style="display:flex; justify-content:space-between; flex-wrap:wrap; gap:12px; width:100%;">
+    <span>© <span id="year"></span> ahmadhomebakers. Baked in Faisalabad.</span>
+    <a href="#menu">Menu</a>
+  </div>
+</footer>
+
+<div class="cart-overlay" id="cart-overlay"></div>
+<aside class="cart-drawer" id="cart-drawer" aria-label="Shopping cart">
+  <div class="cart-head">
+    <h3>Your box</h3>
+    <button class="cart-close" id="cart-close" aria-label="Close cart">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18M6 6l12 12"/></svg>
+    </button>
+  </div>
+  <div class="cart-items" id="cart-items">
+    <div class="cart-empty">Your box is empty. Add a brownie, cookie or cake from the menu.</div>
+  </div>
+  <div class="cart-foot">
+    <div class="cart-subtotal">
+      <span>Subtotal</span>
+      <span class="amt" id="cart-subtotal">Rs 0</span>
+    </div>
+    <button class="checkout-btn" id="checkout-btn" disabled>Proceed to checkout</button>
+    <div class="cart-note">Checkout confirms your order on WhatsApp.</div>
+  </div>
+</aside>
+
+<script>
+  document.getElementById('year').textContent = new Date().getFullYear();
+  const d = new Date();
+  const opts = { day: 'numeric', month: 'short', year: 'numeric' };
+  document.getElementById('stamp-date').textContent = d.toLocaleDateString('en-GB', opts);
+
+  // ---------- CART ----------
+  const cart = []; // { id, name, price, qty }
+
+  const overlay = document.getElementById('cart-overlay');
+  const drawer = document.getElementById('cart-drawer');
+  const cartItemsEl = document.getElementById('cart-items');
+  const cartCountEl = document.getElementById('cart-count');
+  const cartSubtotalEl = document.getElementById('cart-subtotal');
+  const checkoutBtn = document.getElementById('checkout-btn');
+
+  function formatRs(n){
+    return 'Rs ' + n.toLocaleString('en-PK');
+  }
+
+  function openCart(){
+    overlay.classList.add('open');
+    drawer.classList.add('open');
+  }
+  function closeCart(){
+    overlay.classList.remove('open');
+    drawer.classList.remove('open');
+  }
+
+  document.getElementById('cart-toggle').addEventListener('click', openCart);
+  document.getElementById('cart-close').addEventListener('click', closeCart);
+  overlay.addEventListener('click', closeCart);
+  document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeCart(); });
+
+  function addToCart(id, name, price, btn){
+    const existing = cart.find(item => item.id === id);
+    if (existing){
+      existing.qty += 1;
+    } else {
+      cart.push({ id, name, price, qty: 1 });
+    }
+    renderCart();
+    openCart();
+
+    if (btn){
+      btn.classList.add('added');
+      const original = btn.innerHTML;
+      btn.innerHTML = 'Added ✓';
+      setTimeout(() => { btn.classList.remove('added'); btn.innerHTML = original; }, 1100);
+    }
+  }
+
+  function changeQty(id, delta){
+    const item = cart.find(i => i.id === id);
+    if (!item) return;
+    item.qty += delta;
+    if (item.qty <= 0){
+      removeItem(id);
+      return;
+    }
+    renderCart();
+  }
+
+  function removeItem(id){
+    const idx = cart.findIndex(i => i.id === id);
+    if (idx > -1) cart.splice(idx, 1);
+    renderCart();
+  }
+
+  function renderCart(){
+    const totalQty = cart.reduce((sum, i) => sum + i.qty, 0);
+    cartCountEl.textContent = totalQty;
+    cartCountEl.classList.toggle('show', totalQty > 0);
+
+    if (cart.length === 0){
+      cartItemsEl.innerHTML = '<div class="cart-empty">Your box is empty. Add a brownie, cookie or cake from the menu.</div>';
+      cartSubtotalEl.textContent = formatRs(0);
+      checkoutBtn.disabled = true;
+      return;
+    }
+
+    cartItemsEl.innerHTML = cart.map(item => `
+      <div class="cart-item">
+        <div class="ci-info">
+          <div class="ci-name">${item.name}</div>
+          <div class="ci-price">${formatRs(item.price)} each</div>
+          <div class="ci-controls">
+            <button class="qty-btn" data-action="dec" data-id="${item.id}">−</button>
+            <span class="qty-val">${item.qty}</span>
+            <button class="qty-btn" data-action="inc" data-id="${item.id}">+</button>
+            <button class="ci-remove" data-action="remove" data-id="${item.id}">Remove</button>
+          </div>
+        </div>
+        <div class="ci-line-total">${formatRs(item.price * item.qty)}</div>
+      </div>
+    `).join('');
+
+    const subtotal = cart.reduce((sum, i) => sum + i.price * i.qty, 0);
+    cartSubtotalEl.textContent = formatRs(subtotal);
+    checkoutBtn.disabled = false;
+  }
+
+  // add-to-cart buttons (event delegation, works for any .add-btn on the page)
+  document.querySelectorAll('.add-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      addToCart(btn.dataset.id, btn.dataset.name, Number(btn.dataset.price), btn);
+    });
+  });
+
+  // qty +/- and remove (event delegation inside cart-items)
+  cartItemsEl.addEventListener('click', (e) => {
+    const el = e.target.closest('button');
+    if (!el) return;
+    const { action, id } = el.dataset;
+    if (action === 'inc') changeQty(id, 1);
+    if (action === 'dec') changeQty(id, -1);
+    if (action === 'remove') removeItem(id);
+  });
+
+  // checkout — builds an order summary and hands off to WhatsApp
+  checkoutBtn.addEventListener('click', () => {
+    if (cart.length === 0) return;
+    const lines = cart.map(i => `${i.qty} × ${i.name} — ${formatRs(i.price * i.qty)}`);
+    const subtotal = cart.reduce((sum, i) => sum + i.price * i.qty, 0);
+    const message = `Hi isshesara! I'd like to order:\n\n${lines.join('\n')}\n\nSubtotal: ${formatRs(subtotal)}`;
+    const url = `https://wa.me/923446513923?text=${encodeURIComponent(message)}`;
+    window.open(url, '_blank');
+  });
+</script>
+
+</body>
+</html>
